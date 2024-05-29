@@ -1,0 +1,541 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="description"
+			content="Healthy life is an AI-powered food subscription that will make you eat healthy again, 365 days per year. It's tailored to your personal tastes and nutritional needs."
+		/>
+
+		<!-- Always include this line of code!!! -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}" />
+		<link rel="manifest" href="{% static 'manifest.webmanifest' %}" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+		<link rel="stylesheet" href="{% static 'css/general.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/queries.css' %}" />
+
+		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+		<script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+		<script defer src="{% static 'js/script.js' %}"></script>
+
+		<title>Healthy Life &mdash; Never cook again!</title>
+	</head>
+
+	<body>
+		<header class="header">
+			<img loading="lazy" src="{% static 'img/Ekran Resmi 2024-03-18 22.43.21_preview_rev_1.png' %}" alt="healty-life" class="logo" />
+			<nav class="main-nav">
+				<ul class="main-nav-list">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'home' %}">AdviceMe</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a class="main-nav-link" href="#cta">Sign Up</a></li>
+                    <li><a class="main-nav-link nav-cta" href="#cta">Login</a></li>
+                    {% endif %}
+                    
+				</ul>
+			</nav>
+
+			<button class="btn-mobile-nav">
+				<ion-icon class="icon-mobile-nav" name="menu-outline"> </ion-icon>
+				<ion-icon class="icon-mobile-nav" name="close-outline"> </ion-icon>
+			</button>
+		</header>
+
+		<main>
+			<!-- HERO SECTION -->
+			<section class="section-hero">
+				<div class="hero">
+					<div class="hero-text-box">
+						<h1 class="heading-primary"> <code class="heading-primary-code">Healthy</code> living <br> made  easy!!</h1>
+						<p class="hero-description">
+							Enter your calorie intake and <br> get your custom plans made <br> by AI.
+						</p>
+						<a href="{% url 'meal' %}" class="btn btn--full margin-right-sm">Start eating Well</a>
+						<a href="#how" class="btn btn--outline">Learn more &darr;</a>
+						<div class="delivered-meals">
+
+						</div>
+					</div>
+
+					<div class="hero-img-box">
+						<picture>
+							<source srcset="{% static 'img/hero-img.png' %}" type="image/webp" />
+							<source srcset="{% static 'img/hero-img.png' %}" type="image/png" />
+
+							<img
+								loading="lazy"
+								src="{% static 'img/hero-img.png' %}"
+								class="hero-img"
+								alt="woman enjoying food, meals in a container, and food bowls on a table"
+							/>
+						</picture>
+					</div>
+				</div>
+			</section>
+
+			<!-- ADVISE IN SECTION -->
+			<section class="section-Advised">
+				<div class="container">
+					<img src="{% static 'img/Salata.png' %}" alt="An image" class="image">
+					<div class="text">
+					  <ul>
+						<li>✔️ Improved physical health</li>
+						<li>✔️ Better mental health</li>
+						<li>✔️ Increased longevity</li>
+						<li>✔️ Weight management</li>
+						<li>✔️ Improved self-confidence</li>
+						<li>✔️ Reduced stress</li>
+					  </ul>
+					</div>
+				  </div>
+			</section>
+			
+
+			<!-- SECTION HOW -->
+			<section class="section-how" id="how">
+				<div class="container">
+					 
+					<h2 class="section-how-header">Have a 
+						<img 
+						loading="lazy" 
+						src="{% static 'img/Ekran Resmi 2024-03-18 22.43.21_preview_rev_1.png' %}" 
+						class="step-header-img" /> 
+						 for </h2>
+				</div>
+				<div class="container grid grid--2-cols grid--center-v">
+					<!-- STEP 01 -->
+					<div class="step-text-box">
+						<p class="step-number">01</p>
+						<h3 class="heading-tertiary">Find a diet you love</h3>
+						<p class="step-description">
+							Find a nutritious Diet that fits your lifestyle and food preferences. 
+							Take charge of your daily habits with one of the many ongoing Diets including Clean Eating and High Protein
+						</p>
+					</div>
+					<div class="step-img-box">
+						<img
+							loading="lazy"
+							src="{% static 'img/app/app-screen-1.png' %}"
+							class="step-img"
+						/>
+					</div>
+
+					<!-- STEP 02 -->
+<div class="step-img-box">
+    <img loading="lazy" src="{% static 'img/app/app-screen-2.png' %}" class="step-img" />
+</div>
+<div class="step-text-box">
+    <p class="step-number">02</p>
+    <h3 class="heading-tertiary">Start a simplified meal plan</h3>
+    <p class="step-description">
+        Follow a 7-21 day Meal Plan and get four pre-planned recipes a day. Depending on your health goals, there are many Meal Plans to choose from including Keto Burn and Vegan for a week.
+    </p>
+</div>
+<!-- STEP 03 -->
+<div class="step-text-box">
+    <p class="step-number">03</p>
+    <h3 class="heading-tertiary">Track your way to success</h3>
+    <p class="step-description">
+        Track your activities and what you eat with the help of our food-, exercise- and water trackers to maintain a balanced everyday life.
+    </p>
+</div>
+<div class="step-img-box">
+    <img loading="lazy" src="{% static 'img/Milkshake.png' %}" class="step-img" />
+</div>
+<!-- STEP 04 -->
+<div class="step-img-box">
+    <img loading="lazy" src="{% static 'img/Çilek.png' %}" class="step-img" />
+</div>
+<div class="step-text-box">
+    <p class="step-number">04</p>
+    <h3 class="heading-tertiary">Start a simplified meal plan</h3>
+    <p class="step-description">
+        To help you reach your goals and customize your health journey you can add your favorite meals, food items, recipes and exercises to your Favorites.
+    </p>
+</div>
+</div>
+</section>
+
+<!-- START PART-->
+<div class="start-part">
+    <h1 class="start-part-heading">
+        <p>Invest in yourself and</p> <br> boost your <code class="start-part-heading-primary">Healthy</code>, <code class="start-part-heading-primary">body</code>, and <code class="start-part-heading-primary">confidence</code>
+    </h1>
+    <div class="start-part-body">
+        <a href="#cta">
+            <button class="start-part-button">Start today</button>
+          </a>        
+            <h1 class="">
+            <code class="start-part-body1">✔️</code>
+            <p>Quick account creation</p>
+            <code class="start-part-body1">✔️</code> No commitment — cancel at any time
+            <code class="start-part-body1">✔️</code> Join over million other users
+        </h1>
+    </div>
+</div>
+  			
+            <!-- FEATURE SECTION -->
+<div class="container grid grid--4-cols">
+    <div class="feature">
+        <ion-icon class="" name=""> </ion-icon>
+        <p class="feature-title"></p>
+    </div>
+    <div class="feature">
+        <ion-icon class="" name=""> </ion-icon>
+        <p class="feature-title"></p>
+    </div>
+    <div class="feature">
+        <ion-icon class="" name=""> </ion-icon>
+        <p class="feature-title"></p>
+    </div>
+    <div class="feature">
+        <ion-icon class="" name=""> </ion-icon>
+        <p class="feature-title"></p>
+    </div>
+</div>
+</section>
+
+<!-- SECTION CTA -->
+<section class="section-cta" id="cta">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+        .section-cta * {
+            box-sizing: border-box;
+        }
+
+        .section-cta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: url('https://www.figma.com/design/HCvUyjA1SQd8eGUx5O2UDI/Healty-Life?node-id=1-785&t=qjUwjm86ahptUW6x-4') no-repeat center center/cover;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .section-cta h1 {
+            font-weight: bold;
+            font-size: xx-large;
+            margin: 0;
+        }
+
+        .section-cta p {
+            font-size: 14px;
+            font-weight: 100;
+            line-height: 20px;
+            letter-spacing: 0.5px;
+            margin: 20px 0 30px;
+        }
+
+        .section-cta button {
+            border-radius: 20px;
+            border: 1px solid #d83d8d;
+            background-color: #d83d8d;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+        }
+
+        .section-cta button:active {
+            transform: scale(0.95);
+        }
+
+        .section-cta button.ghost {
+            background-color: transparent;
+            border-color: #ffffff;
+        }
+
+        .section-cta form {
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 50px;
+            height: 100%;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        .section-cta input {
+            background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+        }
+
+        .section-cta .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 480px;
+        }
+
+        .section-cta .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.6s ease-in-out;
+            overflow-y: auto;
+        }
+
+        .section-cta .sign-in-container {
+            left: 0;
+            width: 50%;
+            z-index: 2;
+        }
+
+        .section-cta .container.right-panel-active .sign-in-container {
+            transform: translateX(100%);
+        }
+
+        .section-cta .sign-up-container {
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .section-cta .container.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            animation: show 0.6s;
+        }
+
+        @keyframes show {
+            0%, 49.99% {
+                opacity: 0;
+                z-index: 1;
+            }
+
+            50%, 100% {
+                opacity: 1;
+                z-index: 5;
+            }
+        }
+
+        .section-cta .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 100;
+        }
+
+        .section-cta .container.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        .section-cta .overlay {
+            background: #D92F86;
+            background: -webkit-linear-gradient(to right, #D92F86, #D92F86);
+            background: linear-gradient(to right, #f17db9, #D92F86);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 0 0;
+            color: #ffffff;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .section-cta .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .section-cta .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .section-cta .overlay-left {
+            transform: translateX(-20%);
+        }
+
+        .section-cta .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .section-cta .container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .section-cta .container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+
+       
+    </style>
+    <section class="section-cta" id="cta">
+        <div class="container" id="cta-main">
+            <div class="form-container sign-up-container">
+                <form action="#">
+                    <p>or use your email for registration</p>
+                    <input type="text" name="first_name" placeholder="First Name" required>
+                    <input type="text" name="second_name" placeholder="Second Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="pswd" placeholder="Password" required>
+                    <input type="number" name="age" placeholder="Age" required>
+                    <input type="number" name="height" placeholder="Height" required>
+                    <input type="number" name="weight" placeholder="Weight" required>
+                    <input type="tel" name="mobile" placeholder="Mobile No" required>
+                    <label for="gender">Gender:</label>
+                    <select name="gender" id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+                    <button>Sign Up</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form action="#">
+                    <h1>Sign in</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#" class="social"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p>or use your account</p>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="pswd" placeholder="Password" required>
+                    <button>Sign In</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>To keep connected with us please login with your personal info</p>
+                        <button class="ghost" id="cta-signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Enter your personal details and start journey with us</p>
+                        <button class="ghost" id="cta-signUp">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        const signUpButton = document.getElementById('cta-signUp');
+        const signInButton = document.getElement.getElementById('cta-signIn');
+        const container = document.getElementById('cta-main');
+
+        signUpButton.addEventListener('click', () => {
+            container.classList.add('right-panel-active');
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove('right-panel-active');
+        });
+    </script>
+</section>
+</main>
+
+<!-- SECTION-FOOTER -->
+<footer class="footer">
+    <div class="container grid grid--footer">
+        <div class="logo-col">
+            <a href="#" class="footer-logo">
+                <img loading="lazy" src="{% static 'img/Ekran Resmi 2024-03-18 22.43.21_preview_rev_1.png' %}" class="logo" alt="omnifood logo" />
+            </a>
+            <ul class="social-links">
+                <li>
+                    <a class="footer-link" href="#">
+                        <ion-icon class="social-icon" name="logo-instagram"> </ion-icon>
+                    </a>
+                </li>
+                <li>
+                    <a class="footer-link" href="#">
+                        <ion-icon class="social-icon" name="logo-facebook"> </ion-icon>
+                    </a>
+                </li>
+                <li>
+                    <a class="footer-link" href="#">
+                        <ion-icon class="social-icon" name="logo-twitter"> </ion-icon>
+                    </a>
+                </li>
+            </ul>
+            <p class="copyright">Copyright &copy; <span class="year">2027</span> by Healty Life, Inc. All rights reserved</p>
+        </div>
+        <div class="address-col">
+            <p class="footer-heading">Contact Us</p>
+            <address class="contacts">
+                <p class="address">Maltepe Üniversitesi</p>
+                <p>
+                    <a class="footer-link" href="tel:415-201-6370">0544-230-20-20</a>
+                    <a class="footer-link" href="mailto:hello@omnifood.com">hello@healtylife.com</a>
+                </p>
+            </address>
+        </div>
+        <nav class="nav-col">
+            <p class="footer-heading">Account</p>
+            <ul class="footer-nav">
+                <li><a class="footer-link" href="#">Create Account</a></li>
+                <li><a class="footer-link" href="#">Sign in</a></li>
+            </ul>
+        </nav>
+        <nav class="nav-col">
+            <p class="footer-heading">Company</p>
+            <ul class="footer-nav">
+                <li><a class="footer-link" href="#">About Healthy Life</a></li>
+            </ul>
+        </nav>
+        <nav class="nav-col">
+            <p class="footer-heading">Resources</p>
+            <ul class="footer-nav">
+                <li><a class="footer-link" href="#">Help center</a></li>
+                <li><a class="footer-link" href="#">Privacy & terms</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+</body>
+</html>

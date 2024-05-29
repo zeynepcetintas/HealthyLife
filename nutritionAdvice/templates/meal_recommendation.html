@@ -1,0 +1,275 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meal Recommendation</title>
+    <style>
+        .logo {
+            height: 40px;
+            padding-left: 20px;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url("{% static 'img/healthy.jpeg' %}");
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+        }
+        .container {
+            background-color: rgba(232, 245, 233, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-y: auto;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(235, 235, 235, 0.9);
+            position: fixed;
+            top: 0;
+            z-index: 10;
+        }
+        .navbar img {
+            height: 40px;
+        }
+        .home-button {
+            padding: 10px 20px;
+            margin-right: 20px;
+            background-color: #388E3C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .home-button:hover {
+            background-color: #2E7D32;
+        }
+        h1 {
+            color: #388E3C;
+            font-size: 2em;
+            margin: 80px 0 20px 0; /* Margin adjusted for navbar */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333333;
+        }
+        input[type="text"], select {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            background-color: #D81B60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #C2185B;
+        }
+        .menu-container {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .menu-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: calc(33.33% - 20px);
+            margin: 10px;
+            text-align: center;
+        }
+        .menu-item h2 {
+            color: #388E3C;
+            font-size: 1.5em;
+        }
+        .menu-item p {
+            color: #333333;
+        }
+        .menu-item button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #388E3C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .menu-item button:hover {
+            background-color: #2E7D32;
+        }
+        .message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #388E3C;
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            border: 2px solid #388E3C;
+            border-radius: 5px;
+            background-color: rgba(232, 245, 233, 0.9);
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="navbar">
+        <img loading="lazy" src="{% static 'img/Ekran Resmi 2024-03-18 22.43.21_preview_rev_1.png' %}" alt="healty-life" class="logo" />
+        <a href="{% url 'home' %}" class="home-button">Home</a>
+    </div>
+    <div class="container" id="form-container">
+        <h1>Welcome to HealthyLife</h1>
+        <form method="post" id="meal-form">
+            {% csrf_token %}
+            <label for="calorie_goal">Enter your calorie goal:</label>
+            <input type="text" id="calorie_goal" name="calorie_goal" placeholder="e.g. 1750" required>
+            
+            <label for="meal_type">Select meal type:</label>
+            <select id="meal_type" name="meal_type" required>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="snack">Snack</option>
+                <option value="dinner">Dinner</option>
+                <option value="dessert">Dessert</option>
+            </select>
+            <button type="submit">Get Recommendation</button>
+        </form>
+    </div>
+    
+    <div class="menu-container" id="menu-container">
+        <div class="menu-item" id="menu1">
+            <h2>Choice 1</h2>
+            <p id="menu1-recommendation"></p>
+            <button class="choose-button">Choose it!</button>
+        </div>
+        <div class="menu-item" id="menu2">
+            <h2>Choice 2</h2>
+            <p id="menu2-recommendation"></p>
+            <button class="choose-button">Choose it!</button>
+        </div>
+        <div class="menu-item" id="menu3">
+            <h2>Choice 3</h2>
+            <p id="menu3-recommendation"></p>
+            <button class="choose-button">Choose it!</button>
+        </div>
+    </div>    
+    
+    <div class="message" id="message">Great choice, enjoy your meal :)</div>
+    
+    <div class="error-message" id="error-message"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('#meal-form');
+            const menuContainer = document.querySelector('#menu-container');
+            const message = document.querySelector('#message');
+            const formContainer = document.querySelector('#form-container');
+            const chooseButtons = document.querySelectorAll('.choose-button');
+            const errorMessage = document.querySelector('#error-message');
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const formData = new FormData(form);
+                
+                fetch("/meal_recommendation/", {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!Array.isArray(data)) {
+                        errorMessage.textContent = 'Error: Invalid response from server';
+                        return;
+                    }
+
+                    if (data.length === 0) {
+                        console.error('No meal recommendations received');
+                        errorMessage.textContent = 'No meal recommendations received';
+                        return;
+                    }
+
+                    document.querySelector('#menu1-recommendation').textContent = data[0] || 'No recommendation';
+                    document.querySelector('#menu2-recommendation').textContent = data[1] || 'No recommendation';
+                    document.querySelector('#menu3-recommendation').textContent = data[2] || 'No recommendation';
+
+                    menuContainer.style.display = 'flex';
+                    menuContainer.scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    errorMessage.textContent = 'Error: ' + error;
+                });
+            });
+            
+            chooseButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    menuContainer.style.display = 'none';
+                    message.style.display = 'block';
+                    setTimeout(() => {
+                        message.style.display = 'none';
+                        form.reset();
+                        formContainer.scrollIntoView({ behavior: 'smooth' });
+                    }, 1000);
+                });
+            });
+        });
+        
+    </script>
+    
+</body>
+</html>
