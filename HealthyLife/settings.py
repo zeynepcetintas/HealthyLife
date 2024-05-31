@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'HealthyLife',       # Oluşturduğunuz veritabanı adı
         'USER': 'root',           # Veritabanı kullanıcı adı
-        'PASSWORD': 'Bet777',   # Veritabanı kullanıcı şifresi
+        'PASSWORD': 'passwrd',   # Veritabanı kullanıcı şifresi
         'HOST': 'localhost',        # Veritabanı sunucusu (genellikle localhost)
         'PORT': '3306', }
 }
